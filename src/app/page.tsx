@@ -1,5 +1,5 @@
 "use client"
-import { AdjusterForm, Button, Form, FormControl, Input, Main, Select, Window } from "./styles"
+import { AdjusterForm, Button, Copyright, Form, FormControl, Input, Main, Select, Window } from "./styles"
 import Image from 'next/image'
 import WomanBloodBankImage from '../assets/image.jpg'
 import { api } from "@/services/api"
@@ -32,7 +32,6 @@ export default function Home() {
     resolver: zodResolver(UpdateBloodDonorFormSchema),
   })
 
-console.log(errors, donor)
   async function handleUpdateBloodDonor(data: UpdateBloodDonorFormInputs) {
     const { donor: register } = data
 
@@ -93,6 +92,10 @@ console.log(errors, donor)
           </Form>
         </AdjusterForm>
       </Window>
+
+      <Copyright>
+        <p>Copyright © 2023 • Denilson Behenck • Todos os direitos reservados</p>
+      </Copyright>
     </Main>
   )
 }

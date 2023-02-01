@@ -116,3 +116,14 @@ export const Button = styled.button`
     cursor: not-allowed;
   }
 `
+
+export const Copyright = styled.div`
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+
+  p {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+`
