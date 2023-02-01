@@ -124,6 +124,6 @@ export const Copyright = styled.div`
 
   p {
     font-size: 0.75rem;
-    color: #6b7280;
+    color: #374151;
   }
 `

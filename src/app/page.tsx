@@ -8,6 +8,7 @@ import { z } from "zod"
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from "react"
 import { toast, Toaster } from "react-hot-toast"
+import { Loading } from "@/components/Loading"
 
 interface Donor {
   doador: string
@@ -22,6 +23,7 @@ const UpdateBloodDonorFormSchema = z.object({
 type UpdateBloodDonorFormInputs = z.infer<typeof UpdateBloodDonorFormSchema>
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(false)
   const [donor, setDonor] = useState<Donor>({} as Donor)
   const {
     register,
@@ -56,6 +58,7 @@ export default function Home() {
   }
 
   async function handleFindByDonor(value: string) {
+    setIsLoading(true)
     const res = await api.post('/findByDonor', {
       donor: value,
     })
@@ -65,7 +68,11 @@ export default function Home() {
       registro: "0",
       sexo: "M",
     }) : setDonor(res.data[0])
+
+    setIsLoading(false)
   }
+
+  const disabledButton = donor.registro === "0" || isLoading === true
 
   return (
     <Main>
@@ -88,7 +95,9 @@ export default function Home() {
               <Input type="text" disabled value={donor.doador ? donor.doador : ''} />
             </FormControl>
 
-            <Button type="submit" disabled={donor.registro === "0"}>Salvar</Button>
+            <Button type="submit" disabled={disabledButton}>
+              {isLoading ? <Loading /> : "Salvar"}
+            </Button>
           </Form>
         </AdjusterForm>
       </Window>
